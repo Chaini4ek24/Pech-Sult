@@ -3,628 +3,548 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Печь и Соль — Ресторан Сибирской Кухни</title>
+    <title>Ресторан «Печь и соль» | Новосибирск</title>
     
+    <!-- Подключение премиальных шрифтов -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg-void: #090A09;
-            --stone-dark: #121412;
-            --stone-card: #181A18;
-            --stone-card-hover: #222522;
-            --ember-orange: #E65100;
-            --ember-glow: #FF6F00;
-            --ash-gold: #D4AF37;
-            --gold-light: #F3E5AB;
-            --text-light: #F5F2EB;
-            --text-dim: #9A9893;
-            --border: rgba(212, 175, 55, 0.15);
-            --border-glow: rgba(255, 111, 0, 0.4);
-            --font-serif: 'Cinzel', serif;
-            --font-sans: 'Montserrat', sans-serif;
+            --bg-dark: #121312;
+            --bg-card: #1a1b1a;
+            --bg-card-alt: #222422;
+            --clay-orange: #C85A32;
+            --clay-bright: #E06B40;
+            --olive-muted: #4A5342;
+            --warm-ash: #E2DDD5;
+            --text-muted: #9E988F;
+            --border: rgba(226, 221, 213, 0.14);
+            --font-title: 'Playfair Display', serif;
+            --font-body: 'Montserrat', sans-serif;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         html, body {
             width: 100%;
-            background-color: var(--bg-void);
-            color: var(--text-light);
-            font-family: var(--font-sans);
             overflow-x: hidden;
             scroll-behavior: smooth;
         }
 
-        #canvas-sparks {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 1;
+        body {
+            background-color: var(--bg-dark);
+            color: var(--warm-ash);
+            font-family: var(--font-body);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 { font-family: var(--font-title); font-weight: 500; }
+
+        .container {
+            width: 100%;
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 24px;
         }
 
         /* HEADER */
         header {
             position: fixed;
             top: 0; left: 0; width: 100%;
-            z-index: 100;
-            padding: 24px 50px;
+            z-index: 1000;
+            background: rgba(18, 19, 18, 0.92);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-wrap {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: linear-gradient(to bottom, rgba(9,10,9,0.95), transparent);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            height: 80px;
         }
 
-        .brand-logo {
-            font-family: var(--font-serif);
-            font-size: 1.6rem;
-            letter-spacing: 3px;
-            color: var(--text-light);
+        .logo {
+            font-family: var(--font-title);
+            font-size: 1.8rem;
+            color: var(--warm-ash);
             text-decoration: none;
-            text-transform: uppercase;
-            font-weight: 700;
-        }
-
-        .brand-logo span { color: var(--ember-glow); }
-
-        .btn-reserve-trigger {
-            border: 1px solid var(--ash-gold);
-            padding: 12px 28px;
-            color: var(--ash-gold);
-            text-decoration: none;
-            font-size: 0.75rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(5px);
-            cursor: pointer;
-            border-radius: 2px;
-        }
-
-        .btn-reserve-trigger:hover {
-            background: var(--ash-gold);
-            color: var(--bg-void);
-            box-shadow: 0 0 25px rgba(212, 175, 55, 0.4);
-            transform: translateY(-2px);
-        }
-
-        /* HERO SCREEN */
-        .hero-screen {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-            padding: 120px 20px 80px;
-            background: radial-gradient(circle at 50% 40%, rgba(255, 111, 0, 0.12) 0%, rgba(9, 10, 9, 0.98) 75%);
-        }
-
-        .hearth-interactive {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background: radial-gradient(circle, var(--ember-glow) 0%, var(--ember-orange) 45%, transparent 75%);
-            margin-bottom: 35px;
-            cursor: pointer;
-            position: relative;
-            box-shadow: 0 0 70px rgba(230, 81, 0, 0.6);
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid rgba(255, 111, 0, 0.3);
-        }
-
-        .hearth-interactive:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 100px rgba(255, 111, 0, 0.9);
-        }
-
-        .hearth-hint {
-            position: absolute;
-            bottom: -32px;
-            font-size: 0.7rem;
             letter-spacing: 2px;
-            color: var(--ash-gold);
-            text-transform: uppercase;
-            white-space: nowrap;
+            font-style: italic;
         }
 
-        .hero-title {
-            font-family: var(--font-serif);
-            font-size: 4.8rem;
-            line-height: 1.05;
-            letter-spacing: 6px;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            background: linear-gradient(to right, #FFFFFF, var(--gold-light), var(--text-dim));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .logo span {
+            color: var(--clay-orange);
+            font-style: normal;
         }
 
-        .hero-sub {
-            font-size: 1.15rem;
-            color: var(--text-dim);
-            max-width: 650px;
-            font-weight: 300;
-            margin-bottom: 45px;
-            letter-spacing: 1px;
-            line-height: 1.7;
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 32px;
         }
 
-        .section-padding {
-            padding: 120px 0;
-            position: relative;
-            z-index: 2;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 30px;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 70px;
-        }
-
-        .story-badge {
-            color: var(--ember-glow);
+        .nav-links a {
+            color: var(--warm-ash);
+            text-decoration: none;
             font-size: 0.8rem;
-            letter-spacing: 4px;
             text-transform: uppercase;
-            margin-bottom: 15px;
-            display: block;
+            letter-spacing: 2px;
+            transition: color 0.3s;
         }
 
-        .story-heading {
-            font-family: var(--font-serif);
-            font-size: 3.2rem;
-            line-height: 1.2;
-            color: var(--text-light);
+        .nav-links a:hover { color: var(--clay-orange); }
+
+        /* ИНТЕРАКТИВНЫЕ КНОПКИ */
+        .btn-header, .btn-main, .btn-outline, .tab-btn {
+            position: relative;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            user-select: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            text-align: center;
         }
 
-        /* МЕНЮ С АКЦЕНТНЫМИ КАРТОЧКАМИ И ФОТО-ПРЕВЬЮ */
-        .menu-experience {
-            background: var(--stone-dark);
-            border: 1px solid var(--border);
-            padding: 50px;
-            border-radius: 6px;
-            box-shadow: 0 30px 80px rgba(0,0,0,0.8);
+        .btn-header:active, .btn-main:active, .btn-outline:active, .tab-btn:active {
+            transform: scale(0.95) !important;
         }
 
-        .menu-nav {
+        .btn-header {
+            background: var(--clay-orange);
+            color: #fff;
+            padding: 10px 22px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 2px;
+            border: none;
+        }
+
+        .btn-header:hover {
+            background: var(--clay-bright);
+            box-shadow: 0 4px 20px rgba(200, 90, 50, 0.4);
+        }
+
+        /* HERO SECTION — ФОН 2026-11-07_10-31-05.jpg */
+        .hero {
+            min-height: 92vh;
+            padding-top: 140px;
+            padding-bottom: 70px;
+            background: linear-gradient(to bottom, rgba(18, 19, 18, 0.6), rgba(18, 19, 18, 0.95)), 
+                        url('2026-11-07_10-31-05.jpg') center/cover no-repeat fixed;
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero-tag {
+            color: var(--clay-orange);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 18px;
+            display: inline-block;
+            border-bottom: 1px solid var(--clay-orange);
+            padding-bottom: 3px;
+        }
+
+        .hero h1 {
+            font-size: 4.2rem;
+            line-height: 1.1;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: var(--clay-orange);
+        }
+
+        .hero-desc {
+            max-width: 680px;
+            margin: 0 auto 38px;
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            font-weight: 300;
+        }
+
+        .hero-btns {
             display: flex;
             justify-content: center;
             gap: 16px;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-            padding-bottom: 30px;
-            margin-bottom: 50px;
             flex-wrap: wrap;
         }
 
-        .menu-tab {
+        .btn-main {
+            background: linear-gradient(135deg, var(--clay-orange), var(--clay-bright));
+            color: #fff;
+            padding: 16px 36px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            border-radius: 2px;
+            border: none;
+            box-shadow: 0 4px 15px rgba(200, 90, 50, 0.3);
+            width: 100%;
+            max-width: 280px;
+        }
+
+        .btn-main:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(200, 90, 50, 0.5);
+        }
+
+        .btn-outline {
+            border: 1px solid var(--warm-ash);
+            color: var(--warm-ash);
+            padding: 16px 36px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            border-radius: 2px;
+            background: transparent;
+            width: 100%;
+            max-width: 280px;
+        }
+
+        .btn-outline:hover {
+            background: var(--warm-ash);
+            color: var(--bg-dark);
+        }
+
+        /* HIGHLIGHTS */
+        .features {
+            padding: 70px 0;
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .feat-box {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 32px 24px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+        }
+
+        .feat-box h3 {
+            font-size: 1.6rem;
+            color: var(--warm-ash);
+            margin-bottom: 10px;
+        }
+
+        .feat-box p { color: var(--text-muted); font-size: 0.9rem; }
+
+        /* CONCEPT SECTION — ФОТО 2026-11-07_10-31-05.jpg */
+        .concept-sec {
+            padding: 100px 0;
+            background: var(--bg-dark);
+        }
+
+        .concept-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .section-subtitle {
+            color: var(--clay-orange);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .concept-text h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            line-height: 1.15;
+        }
+
+        .concept-text p {
+            color: var(--text-muted);
+            margin-bottom: 18px;
+            font-size: 1rem;
+            font-weight: 300;
+        }
+
+        .concept-img img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            display: block;
+        }
+
+        /* MENU SECTION */
+        .menu-sec {
+            padding: 100px 0;
+            background: var(--bg-card-alt);
+        }
+
+        .section-hdr {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 3.2rem;
+            color: var(--warm-ash);
+        }
+
+        .menu-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 45px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
             background: transparent;
             border: 1px solid var(--border);
-            color: var(--text-dim);
-            font-family: var(--font-sans);
-            font-size: 0.85rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            padding: 12px 28px;
+            color: var(--text-muted);
+            padding: 10px 22px;
             border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 0.85rem;
         }
 
-        .menu-tab:hover {
-            color: var(--text-light);
-            border-color: var(--ash-gold);
+        .tab-btn.active {
+            background: var(--olive-muted);
+            color: var(--warm-ash);
+            border-color: var(--clay-orange);
         }
 
-        .menu-tab.active {
-            background: var(--ember-orange);
-            color: #FFF;
-            border-color: var(--ember-glow);
-            box-shadow: 0 4px 20px rgba(230, 81, 0, 0.5);
-        }
-
-        .menu-grid {
+        .menu-items-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
-            min-height: 400px;
+            gap: 24px;
+            min-height: 340px;
         }
 
-        /* КАРТОЧКА БЛЮДА С ВИЗУАЛЬНЫМ БЛОКОМ */
-        .dish-card {
-            background: var(--stone-card);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 6px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: all 0.35s ease;
-            position: relative;
-            animation: fadeIn 0.4s ease forwards;
-        }
-
-        /* Выделение топовых блюд шефа */
-        .dish-card.featured {
-            border: 1px solid var(--ash-gold);
-            background: linear-gradient(145deg, #1e211e, #141614);
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15);
-        }
-
-        .dish-card.featured::before {
-            content: 'ВЫБОР ШЕФА';
-            position: absolute;
-            top: 15px; right: 15px;
-            background: var(--ash-gold);
-            color: #000;
-            font-size: 0.65rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            padding: 4px 10px;
-            border-radius: 2px;
-            z-index: 2;
-        }
-
-        .dish-card:hover {
-            border-color: var(--border-glow);
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.7);
-        }
-
-        .dish-preview {
-            height: 140px;
-            background: radial-gradient(circle at center, rgba(230, 81, 0, 0.25), rgba(18, 20, 18, 0.9));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3.5rem;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            position: relative;
-        }
-
-        .dish-body {
+        .menu-item-card {
+            background: var(--bg-card);
             padding: 24px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            flex-grow: 1;
-        }
-
-        .dish-top {
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 10px;
             gap: 15px;
-        }
-
-        .dish-title {
-            font-family: var(--font-serif);
-            font-size: 1.4rem;
-            color: var(--text-light);
-        }
-
-        .dish-price {
-            font-family: var(--font-serif);
-            font-size: 1.5rem;
-            color: var(--ash-gold);
-            white-space: nowrap;
-            font-weight: 600;
-        }
-
-        .dish-desc {
-            color: var(--text-dim);
-            font-size: 0.9rem;
-            font-weight: 300;
-            line-height: 1.55;
-            margin-bottom: 20px;
-        }
-
-        .dish-tags {
-            display: flex;
-            gap: 8px;
-        }
-
-        .tag {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 4px 10px;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.08);
-            color: var(--ash-gold);
-            border-radius: 20px;
+            animation: fadeIn 0.4s ease;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* MODAL BOOKING */
-        .modal-booking {
-            position: fixed;
-            inset: 0;
-            background: rgba(9, 10, 9, 0.95);
-            backdrop-filter: blur(20px);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.4s ease;
+        .item-details h4 {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+            color: var(--warm-ash);
         }
 
-        .modal-booking.open {
-            opacity: 1;
-            pointer-events: auto;
+        .item-details p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 300;
         }
 
-        .modal-card {
-            width: 100%;
-            max-width: 540px;
-            padding: 50px 40px;
-            border: 1px solid var(--border-glow);
-            background: var(--stone-dark);
-            text-align: center;
+        .item-cost {
+            font-family: var(--font-title);
+            font-size: 1.5rem;
+            color: var(--clay-orange);
+            white-space: nowrap;
+        }
+
+        /* GALLERY SECTION — ФОТО 2026-11-07_10-31-51.jpg, 2026-11-07_10-31-24.jpg, 2026-11-07_10-31-33.jpg */
+        .gallery-sec {
+            padding: 100px 0;
+            background: var(--bg-dark);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .gallery-card {
+            height: 360px;
+            border-radius: 4px;
             position: relative;
-            box-shadow: 0 25px 70px rgba(0,0,0,0.9);
-            border-radius: 6px;
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 20px; right: 25px;
-            color: var(--text-dim);
-            font-size: 1.8rem;
-            cursor: pointer;
-        }
-
-        .modal-card h3 {
-            font-family: var(--font-serif);
-            font-size: 2.4rem;
-            margin-bottom: 8px;
-            color: var(--gold-light);
-        }
-
-        .booking-inputs {
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-            margin-top: 32px;
-        }
-
-        .booking-inputs input, .booking-inputs select {
-            width: 100%;
-            padding: 16px;
-            background: rgba(0,0,0,0.5);
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
             border: 1px solid var(--border);
-            color: #FFF;
-            font-family: var(--font-sans);
+        }
+
+        .gallery-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(18, 19, 18, 0.85), transparent 60%);
+        }
+
+        .gallery-title {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            z-index: 2;
+            font-family: var(--font-title);
+            font-size: 1.5rem;
+            color: var(--warm-ash);
+        }
+
+        /* BOOKING SECTION — ФОН 2026-11-07_10-31-51.jpg */
+        .booking-sec {
+            padding: 100px 0;
+            background: linear-gradient(135deg, rgba(18, 19, 18, 0.92), rgba(26, 27, 26, 0.96)), 
+                        url('2026-11-07_10-31-51.jpg') center/cover no-repeat fixed;
+            border-top: 1px solid var(--border);
+        }
+
+        .booking-box {
+            max-width: 720px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .booking-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin-top: 35px;
+            background: rgba(18, 19, 18, 0.88);
+            backdrop-filter: blur(15px);
+            padding: 35px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            color: var(--warm-ash);
+            font-family: var(--font-body);
             font-size: 0.95rem;
             outline: none;
-            border-radius: 4px;
         }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--clay-orange);
+        }
+
+        .full-width { grid-column: span 2; }
 
         footer {
-            padding: 45px 0;
+            padding: 40px 0;
+            background: #0b0c0b;
             text-align: center;
-            background: #050505;
-            color: var(--text-dim);
+            color: var(--text-muted);
             font-size: 0.85rem;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            position: relative;
-            z-index: 2;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
+        /* МОБИЛЬНАЯ АДАПТАЦИЯ */
         @media (max-width: 992px) {
-            header { padding: 20px 24px; }
-            .hero-title { font-size: 3rem; }
-            .menu-grid { grid-template-columns: 1fr; }
-            .menu-experience { padding: 30px 20px; }
+            .nav-links { display: none; }
+            .header-wrap { height: 70px; }
+            
+            .hero { padding-top: 110px; min-height: auto; }
+            .hero h1 { font-size: 2.6rem; }
+            .hero-desc { font-size: 0.95rem; }
+            
+            .grid-3, .concept-grid, .menu-items-grid, .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title { font-size: 2.2rem; }
+            .concept-text h2 { font-size: 2.1rem; }
+            
+            .booking-form {
+                grid-template-columns: 1fr;
+                padding: 22px 16px;
+            }
+            .full-width { grid-column: span 1; }
+            
+            .btn-main, .btn-outline { max-width: 100%; }
         }
     </style>
 </head>
 <body>
 
-    <canvas id="canvas-sparks"></canvas>
-
     <!-- Header -->
     <header>
-        <a href="#" class="brand-logo">Печь <span>&</span> Соль</a>
-        <button class="btn-reserve-trigger" onclick="toggleModal(true)">Забронировать Стол</button>
+        <div class="container header-wrap">
+            <a href="#" class="logo">печь <span>&</span> соль</a>
+            <ul class="nav-links">
+                <li><a href="#about">О нас</a></li>
+                <li><a href="#concept">Очаг</a></li>
+                <li><a href="#menu">Меню</a></li>
+                <li><a href="#gallery">Галерея</a></li>
+                <li><a href="#booking">Бронирование</a></li>
+            </ul>
+            <a href="#booking" class="btn-header">Забронировать</a>
+        </div>
     </header>
 
-    <!-- Hero Screen -->
-    <section class="hero-screen">
-        <div class="hearth-interactive" onclick="triggerFlameEffect()">
-            <span class="hearth-hint">Нажмите, чтобы разжечь</span>
-        </div>
-        <h1 class="hero-title">Печь & Соль</h1>
-        <p class="hero-sub">Гастрономия живого огня, диких сибирских рецептов и ремесленного хлеба в самом сердце Новосибирска.</p>
-    </section>
-
-    <!-- Menu Section -->
-    <section class="section-padding">
+    <!-- Hero Section -->
+    <section class="hero" id="about">
         <div class="container">
-            <div class="section-header">
-                <span class="story-badge">Гастрономический акцент</span>
-                <h2 class="story-heading">Фирменные Позиции Меню</h2>
-            </div>
-
-            <div class="menu-experience">
-                <div class="menu-nav">
-                    <button class="menu-tab active" onclick="loadMenu('fire', this)">Очаг & Печь</button>
-                    <button class="menu-tab" onclick="loadMenu('wild', this)">Дичь & Лес</button>
-                    <button class="menu-tab" onclick="loadMenu('craft', this)">Крафт & Настойки</button>
-                </div>
-
-                <div class="menu-grid" id="menuTarget">
-                    <!-- Динамический рендеринг -->
-                </div>
+            <span class="hero-tag">Новосибирск • Сибирская кухня</span>
+            <h1>Вкус настоящего <em>огня и земли</em></h1>
+            <p class="hero-desc">Ресторан «Печь и соль» — это дань традициям дровяной печи, наваристым соусам, авторской локальной кухне и выпечке ручной работы.</p>
+            
+            <div class="hero-btns">
+                <a href="#booking" class="btn-main">Зарезервировать стол</a>
+                <a href="#menu" class="btn-outline">Смотреть меню</a>
             </div>
         </div>
     </section>
 
-    <!-- Modal Booking -->
-    <div class="modal-booking" id="bookingModal">
-        <div class="modal-card">
-            <span class="close-modal" onclick="toggleModal(false)">&times;</span>
-            <h3>Резерв Стола</h3>
-            <p style="color: var(--text-dim); font-size: 0.9rem;">Прикоснитесь к культуре сибирского огня</p>
-            
-            <form class="booking-inputs" id="interactiveForm">
-                <input type="text" id="bName" placeholder="Ваше Имя" required>
-                <input type="tel" id="bPhone" placeholder="Номер телефона" required>
-                <input type="date" id="bDate" required>
-                <select id="bGuests" required>
-                    <option value="">Количество Гостей</option>
-                    <option value="1 персона">1 персона</option>
-                    <option value="2 персоны">2 человека</option>
-                    <option value="3-4 персоны">3–4 человека</option>
-                    <option value="5+ гостей">Компания (5+ гостей)</option>
-                </select>
-                <button type="submit" class="btn-reserve-trigger" style="width: 100%; background: var(--ember-orange); color: #FFF; border: none; font-weight: 600; padding: 16px;">Подтвердить резерв</button>
-            </form>
+    <!-- Highlights -->
+    <section class="features">
+        <div class="container grid-3">
+            <div class="feat-box">
+                <h3>Дровяной Очаг</h3>
+                <p>Блюда с глубоким ароматом березовых дров из помпейской печи при 450°C.</p>
+            </div>
+            <div class="feat-box">
+                <h3>Локальные Продукты</h3>
+                <p>Дикая сибирская рыба, оленина, соленые лесные грибы и таежные ягоды.</p>
+            </div>
+            <div class="feat-box">
+                <h3>Ремесленный Хлеб</h3>
+                <p>Ежедневная выпечка подового хлеба на закваске собственного приготовления.</p>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <footer>
-        <div class="container">
-            <p>© 2026 Ресторан «Печь и соль» • Новосибирск. Все права защищены.</p>
-        </div>
-    </footer>
-
-    <script>
-        const menuDB = {
-            fire: [
-                { title: "Томленая лопатка барана", desc: "Приготовлена в печи с соусом из таежной брусники и запеченным картофелем", price: "980 ₽", tags: ["Печь", "Хит"], featured: true, icon: "🍖" },
-                { title: "Стерлядь на дубовых углях", desc: "С соусом из печеных томатов, пряными травами и лимоном", price: "1 250 ₽", tags: ["Рыба", "Шеф"], featured: true, icon: "🐟" },
-                { title: "Пирог с белыми грибами", desc: "Хрустящее тесто на фермерском масле из дровяной печи", price: "640 ₽", tags: ["Выпечка"], featured: false, icon: "🥧" },
-                { title: "Утка с моченой брусникой", desc: "Томленая ножка конфи с пюре из печеной тыквы", price: "890 ₽", tags: ["Печь"], featured: false, icon: "🍗" }
-            ],
-            wild: [
-                { title: "Тар-тар из мяса оленя", desc: "С клюквенным соусом, каперсами и хрустящим подовым хлебом", price: "740 ₽", tags: ["Дичь", "Закуска"], featured: true, icon: "🥩" },
-                { title: "Строганина из Муксуна", desc: "Подается на ледяной глыбе с крупной морской солью и перцем", price: "790 ₽", tags: ["Свежий улов"], featured: false, icon: "🧊" },
-                { title: "Пельмени с мясом косули", desc: "Ручная лепка на крепком грибном бульоне со сметаной", price: "720 ₽", tags: ["Традиции"], featured: false, icon: "🥟" },
-                { title: "Ассорти сибирских солений", desc: "Хрустящие грузди, соленые черри и маринованный чеснок", price: "620 ₽", tags: ["Соления"], featured: false, icon: "🧄" }
-            ],
-            craft: [
-                { title: "Настойка Кедровая на меду", desc: "Фирменный купаж собственного приготовления (50 мл)", price: "280 ₽", tags: ["Крафт"], featured: true, icon: "🥃" },
-                { title: "Сбитень на облепихе", desc: "Горячий мед, облепиха, специи и гвоздика", price: "390 ₽", tags: ["Согревающий"], featured: false, icon: "☕" },
-                { title: "Таежный сбор", desc: "Иван-чай, брусничный лист, чабрец, сушеная морошка", price: "420 ₽", tags: ["Чай"], featured: false, icon: "🫖" },
-                { title: "Настойка Клюквенная", desc: "Настойка на дикой сибирской клюкве (50 мл)", price: "280 ₽", tags: ["Крафт"], featured: false, icon: "🍷" }
-            ]
-        };
-
-        function loadMenu(key, el) {
-            document.querySelectorAll('.menu-tab').forEach(b => b.classList.remove('active'));
-            if(el) el.classList.add('active');
-            
-            const target = document.getElementById('menuTarget');
-            target.innerHTML = menuDB[key].map(item => `
-                <div class="dish-card ${item.featured ? 'featured' : ''}">
-                    <div class="dish-preview">
-                        <span>${item.icon}</span>
-                    </div>
-                    <div class="dish-body">
-                        <div>
-                            <div class="dish-top">
-                                <h4 class="dish-title">${item.title}</h4>
-                                <span class="dish-price">${item.price}</span>
-                            </div>
-                            <p class="dish-desc">${item.desc}</p>
-                        </div>
-                        <div class="dish-tags">
-                            ${item.tags.map(t => `<span class="tag">${t}</span>`).join('')}
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function toggleModal(show) {
-            document.getElementById('bookingModal').classList.toggle('open', show);
-        }
-
-        const canvas = document.getElementById('canvas-sparks');
-        const ctx = canvas.getContext('2d');
-        let width = canvas.width = window.innerWidth;
-        let height = canvas.height = window.innerHeight;
-
-        window.addEventListener('resize', () => {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        });
-
-        const particles = [];
-        for(let i=0; i<45; i++) {
-            particles.push({
-                x: Math.random() * width,
-                y: Math.random() * height,
-                r: Math.random() * 2 + 1,
-                speedY: Math.random() * 1.5 + 0.4,
-                opacity: Math.random()
-            });
-        }
-
-        function drawSparks() {
-            ctx.clearRect(0, 0, width, height);
-            particles.forEach(p => {
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 111, 0, ${p.opacity})`;
-                ctx.fill();
-
-                p.y -= p.speedY;
-                if(p.y < 0) {
-                    p.y = height;
-                    p.x = Math.random() * width;
-                }
-            });
-            requestAnimationFrame(drawSparks);
-        }
-
-        function triggerFlameEffect() {
-            for(let i=0; i<30; i++) {
-                particles.push({
-                    x: width / 2,
-                    y: height / 2.5,
-                    r: Math.random() * 3 + 1,
-                    speedY: (Math.random() - 0.5) * 6,
-                    opacity: 1
-                });
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            loadMenu('fire');
-            drawSparks();
-        });
-
-        document.getElementById('interactiveForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Ваш стол успешно забронирован!');
-            toggleModal(false);
-            this.reset();
-        });
-    </script>
-</body>
-</html>
+    <!-- Concept Section -->
+    <section class="concept-sec" id="concept">
+        <div class="container concept-grid">
+            <div class="concept-text">
+                <span class="section-subtitle">Сердце заведения</span>
+                <h2>Живой огонь & Натуральные текстуры</h2>
+                <p>Мы строим нашу кухню вокруг дровяной печи. Здесь томится мясо, выпекается пы
