@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Печь и соль — ресторан современной сибирской кухни, Новосибирск</title>
+<meta name="description" content="«Печь и соль» — ресторан современной сибирской кухни в Новосибирске. Дровяная печь, сибирские продукты, ремесленный хлеб. Ленина, 85. Бронирование стола онлайн.">
+<meta name="theme-color" content="#121311">
+<meta property="og:title" content="Печь и соль — современная сибирская кухня">
+<meta property="og:description" content="Дровяная печь, камень, лён и сибирские продукты. Новосибирск, Ленина, 85.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23121311'/%3E%3Cpath d='M8 26V15a8 8 0 0 1 16 0v11' fill='none' stroke='%23b0502a' stroke-width='2.4'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Onest:wght@300;400;500;600&display=swap" rel="stylesheet">
+<noscript><style>.rv{opacity:1!important;transform:none!important}</style></noscript>
+
+<style>
+/* ===== Палитра: снята с фотографий зала, печи, бара и вышитой салфетки ===== */
+:root{
+  --ash-950:#121311;   /* тёмные провалы потолка и окно кухни */
+  --ash-900:#181a17;   /* бетон в полутени */
+  --ash-800:#222420;
+  --stone:#4b4e49;     /* рельефный камень вокруг печи */
+  --olive:#6c7457;     /* диваны и шторы */
+  --teal:#47554d;      /* рифлёные фасады бара */
+  --terra:#b0502a;     /* вышивка на салфетке, кресла */
+  --ember:#df8a3e;     /* огонь в печи, подсветка полок */
+  --brass:#a8823f;     /* латунные подвесы */
+  --linen:#e8dec9;     /* лён */
+  --linen-dim:#b4ab98;
+  --clay:#c9b48f;      /* керамика */
+  --paper:#e8dec9;
+
+  --serif:"Cormorant Garamond","Times New Roman",serif;
+  --sans:"Onest",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --gutter:clamp(20px,4.6vw,64px);
+  --col-gap:clamp(14px,2vw,30px);
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--ash-900);color:var(--linen);font-family:var(--sans);font-size:16px;line-height:1.65;font-weight:350;overflow-x:clip;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body.lock{overflow:hidden}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit}
+p{margin:0 0 1em}
+ul,dl,dd,figure{margin:0;padding:0;list-style:none}
+:focus-visible{outline:2px solid var(--ember);outline-offset:4px}
+::selection{background:var(--terra);color:var(--linen)}
+
+.wrap{width:min(1280px,100% - var(--gutter)*2);margin-inline:auto}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--col-gap)}
+section{position:relative;padding-block:clamp(80px,11vw,160px)}
+
+/* типографика */
+h1,h2,h3{font-family:var(--serif);font-weight:400;margin:0;line-height:1.02;letter-spacing:-.015em}
+h2{font-size:clamp(2.4rem,5.4vw,4.6rem)}
+h2 i,h1 i{font-style:italic;font-weight:300}
+.label{display:block;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;color:var(--linen-dim)}
+.label b{color:var(--ember);font-weight:500;margin-right:.9em}
+.dim{color:var(--linen-dim)}
+
+/* кнопки и ссылки */
+.btn{display:inline-flex;align-items:center;gap:12px;padding:16px 28px;border:1px solid var(--terra);background:var(--terra);color:var(--linen);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500;cursor:pointer;border-radius:2px;transition:background .35s var(--ease),color .35s var(--ease),border-color .35s var(--ease)}
+.btn:hover{background:var(--ember);border-color:var(--ember);color:var(--ash-950)}
+.btn[disabled]{opacity:.55;pointer-events:none}
+.btn.line{background:transparent;border-color:rgba(232,222,201,.4)}
+.btn.line:hover{background:var(--linen);border-color:var(--linen);color:var(--ash-950)}
+.link{position:relative;display:inline-block;padding-bottom:4px;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;font-weight:500}
+.link::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform-origin:left;transition:transform .45s var(--ease)}
+.link:hover::after{transform:scaleX(.35)}
+.link.arrow::before{content:"→";margin-right:10px;color:var(--ember)}
+
+/* ===== Шапка ===== */
+header.top{position:fixed;inset:0 0 auto 0;z-index:80;padding:22px 0;transition:background .4s,padding .4s,border-color .4s;border-bottom:1px solid transparent}
+header.top.scrolled{background:rgba(18,19,17,.94);padding:14px 0;border-color:rgba(232,222,201,.1)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:24px}
+.logo{position:relative;z-index:3;font-family:var(--serif);font-size:1.7rem;letter-spacing:.01em;line-height:1;white-space:nowrap;font-weight:500}
+.logo i{color:var(--terra);font-weight:400;padding:0 .08em}
+.links{display:flex;align-items:center;gap:clamp(20px,3vw,44px)}
+.links a:not(.btn){font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;color:var(--linen-dim);transition:color .3s}
+.links a:not(.btn):hover{color:var(--linen)}
+.links .btn{padding:12px 22px}
+.burger{display:none;position:relative;z-index:3;width:44px;height:44px;background:transparent;border:0;cursor:pointer}
+.burger span{position:absolute;left:9px;right:9px;height:1px;background:var(--linen);transition:transform .4s var(--ease),opacity .2s}
+.burger span:nth-child(1){top:16px}.burger span:nth-child(2){top:27px}
+.burger[aria-expanded="true"] span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
+.burger[aria-expanded="true"] span:nth-child(2){transform:translateY(-5.5px) rotate(-45deg)}
+
+/* ===== Hero ===== */
+.hero{min-height:100svh;display:flex;flex-direction:column;padding:clamp(110px,15vh,150px) 0 0;background:var(--ash-950)}
+.hero-grid{flex:1;align-items:end;padding-bottom:clamp(30px,5vh,60px)}
+.hero-copy{grid-column:1/8}
+.hero .label{margin-bottom:clamp(22px,4vh,44px)}
+.hero h1{font-size:clamp(4.6rem,14.5vw,13.5rem);font-weight:300;line-height:.86;letter-spacing:-.035em}
+.hero h1 span{display:block}
+.hero h1 .l2{padding-left:.55em}
+.hero h1 .l2 i{color:var(--terra)}
+.hero-lead{display:flex;flex-wrap:wrap;align-items:center;gap:26px 40px;margin-top:clamp(30px,5vh,56px)}
+.hero-lead p{max-width:34ch;margin:0;color:var(--linen-dim);font-size:1.02rem}
+.hero-photo{grid-column:8/13;position:relative}
+.arch{border-radius:999px 999px 0 0;overflow:hidden;background:var(--ash-800)}
+.hero-photo .arch{aspect-ratio:3/4;max-height:calc(100svh - 260px);width:100%}
+.hero-photo img,.menu-photo img{width:100%;height:100%;object-fit:cover}
+.hero-photo img{object-position:40% 60%;will-change:transform}
+figcaption{margin-top:12px;font-size:.72rem;letter-spacing:.06em;color:var(--linen-dim)}
+figcaption b{font-weight:500;color:var(--ember);margin-right:.7em;letter-spacing:.14em}
+.strip{border-top:1px solid rgba(232,222,201,.16)}
+.strip .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--col-gap)}
+.strip div{padding:22px 0 26px}
+.strip dt{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--linen-dim);margin-bottom:6px}
+.strip dd{font-family:var(--serif);font-size:1.45rem;line-height:1.2}
+
+/* ===== О ресторане ===== */
+.about .grid{row-gap:56px}
+.about .label{grid-column:1/4;padding-top:.9em}
+.about-body{grid-column:4/13}
+.about-body h2{max-width:15ch;margin-bottom:clamp(28px,4vw,52px)}
+.about-body .big{font-family:var(--serif);font-weight:300;font-size:clamp(1.35rem,2.3vw,2rem);line-height:1.34;max-width:34em;margin-bottom:clamp(40px,6vw,80px);color:var(--linen)}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--col-gap)}
+.facts div{border-top:1px solid rgba(232,222,201,.2);padding-top:22px}
+.facts dt{font-family:var(--serif);font-style:italic;font-size:1.9rem;line-height:1;margin-bottom:12px;color:var(--ember)}
+.facts dd{font-size:.94rem;color:var(--linen-dim);max-width:30ch}
+.award{margin-top:clamp(36px,5vw,64px);font-size:.9rem;color:var(--linen-dim);max-width:52ch}
+.award b{font-weight:500;color:var(--linen)}
+
+/* ===== Меню (лён) ===== */
+.menu{background:var(--paper);color:#27231d}
+.menu .label{color:#6b6350}
+.menu .label b{color:var(--terra)}
+.menu-photo-wrap{grid-column:1/5;align-self:start;position:sticky;top:96px}
+.menu-photo.arch{aspect-ratio:3/4;background:#cfc3a8}
+.menu-photo-wrap figcaption{color:#6b6350}
+.menu-photo-wrap figcaption b{color:var(--terra)}
+.menu-main{grid-column:6/13}
+.menu-main h2{margin-bottom:18px}
+.menu-main h2 i{color:var(--terra)}
+.menu-lead{max-width:40ch;color:#5b5444;margin-bottom:clamp(30px,4vw,48px)}
+.tabs{display:flex;gap:0 clamp(18px,3vw,34px);overflow-x:auto;border-bottom:1px solid rgba(39,35,29,.2);scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;background:none;border:0;cursor:pointer;padding:0 0 14px;margin-bottom:-1px;border-bottom:2px solid transparent;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;font-weight:500;color:#7a715d;transition:color .3s,border-color .3s}
+.tab:hover{color:#27231d}
+.tab[aria-selected="true"]{color:var(--terra);border-color:var(--terra)}
+.panel{display:none;padding-top:8px}
+.panel.active{display:block;animation:in .6s var(--ease)}
+@keyframes in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.dish{padding:24px 0;border-bottom:1px solid rgba(39,35,29,.14)}
+.dish-row{display:flex;align-items:baseline;gap:14px}
+.dish-name{font-family:var(--serif);font-size:clamp(1.4rem,2.2vw,1.8rem);font-weight:500;line-height:1.12}
+.dish-name .sign{margin-left:.6em;font-style:italic;font-weight:400;font-size:.9em;color:var(--terra)}
+.dish-dots{flex:1;min-width:16px;border-bottom:1px dotted rgba(39,35,29,.4);transform:translateY(-6px)}
+.dish-price{font-family:var(--serif);font-size:1.45rem;font-weight:600;white-space:nowrap}
+.dish-desc{margin:6px 0 0;font-size:.92rem;color:#5b5444;max-width:50ch}
+.menu-note{margin-top:30px;font-size:.82rem;color:#6b6350;max-width:56ch}
+
+/* ===== Атмосфера ===== */
+.air{background:var(--ash-950)}
+.air-head{margin-bottom:clamp(44px,6vw,90px)}
+.air-head .label{margin-bottom:22px}
+.air .row1{align-items:end;row-gap:30px;margin-bottom:clamp(60px,9vw,130px)}
+.f-zal{grid-column:1/9}
+.t-zal{grid-column:10/13;padding-bottom:42px}
+.air .row2{align-items:start;row-gap:30px}
+.t-bar{grid-column:1/5;padding-top:clamp(0px,6vw,90px)}
+.f-bar{grid-column:6/13}
+.air figure img{width:100%}
+.air h3{font-size:clamp(1.8rem,3vw,2.5rem);margin-bottom:14px;font-weight:400}
+.air h3 i{color:var(--ember)}
+.air p{color:var(--linen-dim);font-size:.96rem;max-width:38ch}
+.air .quote{color:var(--linen);margin-top:clamp(80px,12vw,170px);padding-top:34px;border-top:1px solid rgba(232,222,201,.16);font-family:var(--serif);font-style:italic;font-weight:300;font-size:clamp(2.1rem,5.4vw,4.6rem);line-height:1.04;letter-spacing:-.02em;max-width:17ch}
+.air .quote span{color:var(--terra)}
+
+/* ===== Бронирование ===== */
+.reserve{background:var(--ash-900);border-top:1px solid rgba(232,222,201,.08)}
+.reserve .grid{row-gap:50px}
+.res-info{grid-column:1/5}
+.res-info .label{margin-bottom:24px}
+.res-info h2{margin-bottom:26px}
+.res-info p{color:var(--linen-dim);max-width:34ch}
+.steps{margin-top:36px;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:34px 1fr;padding:14px 0;border-top:1px solid rgba(232,222,201,.14);font-size:.92rem;color:var(--linen-dim)}
+.steps li::before{content:"0" counter(s);font-family:var(--serif);font-style:italic;color:var(--ember);font-size:1.1rem}
+.res-form{grid-column:6/13}
+form{display:grid;grid-template-columns:1fr 1fr;gap:34px var(--col-gap)}
+.field{display:flex;flex-direction:column;gap:4px;position:relative}
+.field.full{grid-column:1/-1}
+label{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--linen-dim);font-weight:500}
+input,select,textarea{width:100%;background:transparent;border:0;border-bottom:1px solid rgba(232,222,201,.3);border-radius:0;padding:10px 0 12px;font-size:1.05rem;appearance:none;-webkit-appearance:none;color-scheme:dark;transition:border-color .3s}
+select{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' fill='none' stroke='%23df8a3e' stroke-width='1.3'/></svg>");background-repeat:no-repeat;background-position:right 2px center;padding-right:26px}
+select option{background:var(--ash-900);color:var(--linen)}
+textarea{resize:vertical;min-height:84px}
+input::placeholder,textarea::placeholder{color:rgba(180,171,152,.55)}
+input:hover,select:hover,textarea:hover{border-color:rgba(232,222,201,.6)}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ember)}
+.field.err input,.field.err select{border-color:#d9694b}
+.msg{display:none;font-size:.76rem;color:#e58a6e;position:absolute;left:0;bottom:-22px}
+.field.err .msg{display:block}
+.form-foot{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:18px 30px}
+.form-foot small{flex:1;min-width:220px;color:var(--linen-dim);font-size:.76rem;line-height:1.5}
+.success{display:none;padding:6px 0 10px}
+.success.show{display:block;animation:in .6s var(--ease)}
+.success h3{font-size:clamp(2rem,4vw,3rem);margin-bottom:12px}
+.success p{color:var(--linen-dim);max-width:46ch}
+.success .acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+.mine{margin-top:56px;padding-top:26px;border-top:1px solid rgba(232,222,201,.14)}
+.mine h3{font-size:1.6rem;margin-bottom:6px}
+.mine li{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid rgba(232,222,201,.1);font-size:.92rem}
+.mine li small{display:block;color:var(--linen-dim);font-size:.8rem}
+.mine .empty{color:var(--linen-dim);font-size:.9rem;padding:10px 0;border:0}
+.mine button{background:none;border:0;border-bottom:1px solid rgba(232,222,201,.3);padding:0 0 2px;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--linen-dim);cursor:pointer;transition:color .3s,border-color .3s}
+.mine button:hover{color:#e58a6e;border-color:#e58a6e}
+
+/* ===== Контакты ===== */
+.contacts{background:var(--ash-950);padding-bottom:40px}
+.contacts .grid{row-gap:50px}
+.c-big{grid-column:1/8}
+.c-big .label{margin-bottom:26px}
+.c-big h2{font-size:clamp(3.6rem,11vw,10rem);font-weight:300;line-height:.9;letter-spacing:-.035em}
+.c-big p{margin-top:24px;color:var(--linen-dim);max-width:40ch}
+.c-list{grid-column:9/13;align-self:end}
+.c-list div{padding:18px 0;border-top:1px solid rgba(232,222,201,.16)}
+.c-list dt{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--linen-dim);margin-bottom:6px}
+.c-list dd{font-family:var(--serif);font-size:1.4rem;line-height:1.25}
+.c-list dd a:hover{color:var(--ember)}
+.c-maps{display:flex;flex-wrap:wrap;gap:12px 30px;padding-top:6px}
+footer{margin-top:clamp(70px,10vw,130px);padding-top:26px;border-top:1px solid rgba(232,222,201,.12);display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;color:#837d6d;font-size:.78rem}
+
+/* ===== Появление ===== */
+.rv{opacity:0;transform:translateY(26px);transition:opacity 1s var(--ease),transform 1s var(--ease);transition-delay:calc(var(--i,0)*90ms)}
+.rv.in{opacity:1;transform:none}
+
+/* ===== Адаптив ===== */
+@media (max-width:1000px){
+  .burger{display:block}
+  .links{position:fixed;inset:0;z-index:2;display:none;flex-direction:column;align-items:flex-start;justify-content:center;gap:6px;padding:90px var(--gutter) 50px;background:var(--ash-950)}
+  .links.open{display:flex;animation:in .4s var(--ease)}
+  .links a:not(.btn){font-family:var(--serif);font-size:clamp(2.2rem,9vw,3.4rem);letter-spacing:-.01em;text-transform:none;font-weight:400;color:var(--linen);padding:6px 0}
+  .links .btn{margin-top:26px;padding:16px 28px}
+  .hero-copy,.hero-photo{grid-column:1/-1}
+  .hero-photo{order:-1;margin-bottom:34px;max-width:420px}
+  .hero-photo .arch{max-height:none;aspect-ratio:4/5}
+  .hero h1{font-size:clamp(4.4rem,22vw,9rem)}
+  .about .label{grid-column:1/-1;padding:0}
+  .about-body{grid-column:1/-1}
+  .facts{grid-template-columns:1fr;gap:26px}
+  .menu-photo-wrap{grid-column:1/-1;position:static;max-width:380px;margin-bottom:44px}
+  .menu-main{grid-column:1/-1}
+  .f-zal,.t-zal,.t-bar,.f-bar{grid-column:1/-1;padding:0}
+  .t-zal{order:2}
+  .air .row2{display:flex;flex-direction:column}
+  .f-bar{order:-1}
+  .res-info,.res-form{grid-column:1/-1}
+  .c-big,.c-list{grid-column:1/-1}
+}
+@media (max-width:640px){
+  form{grid-template-columns:1fr;gap:32px}
+  .strip .wrap{grid-template-columns:1fr}
+  .strip div{padding:16px 0;border-bottom:1px solid rgba(232,222,201,.1)}
+  .strip div:last-child{border:0}
+  .dish{padding:20px 0}
+  .btn{padding:15px 22px}
+  .hero-lead{gap:22px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<header class="top" id="top">
+  <div class="wrap nav">
+    <a class="logo" href="#hero" aria-label="Печь и соль, на главную">печь <i>и</i> соль</a>
+    <nav class="links" id="links" aria-label="Основная навигация">
+      <a href="#about">О ресторане</a>
+      <a href="#menu">Меню</a>
+      <a href="#air">Зал</a>
+      <a href="#contacts">Контакты</a>
+      <a class="btn" href="#reserve">Забронировать</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="links"><span></span><span></span></button>
+  </div>
+</header>
+
+<main>
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <div class="wrap grid hero-grid">
+    <div class="hero-copy">
+      <span class="label rv"><b>Новосибирск</b>Современная сибирская кухня</span>
+      <h1 class="rv" style="--i:1"><span>Печь</span><span class="l2"><i>и</i> соль</span></h1>
+      <div class="hero-lead rv" style="--i:2">
+        <p>Ресторан на улице Ленина. Часть блюд готовится в дровяной печи прямо в зале, продукты по возможности сибирские.</p>
+        <a class="btn" href="#reserve">Забронировать стол</a>
+      </div>
+    </div>
+    <figure class="hero-photo rv" style="--i:2">
+      <div class="arch"><img src="img/pech.webp" width="657" height="881" alt="Дровяная печь с каменной кладкой, огонь в топке, за ней росписью изображены листья" fetchpriority="high"></div>
+      <figcaption><b>01</b>Дровяная печь и каменная стена</figcaption>
+    </figure>
+  </div>
+  <dl class="strip">
+    <div class="wrap">
+      <div><dt>Адрес</dt><dd>Ленина, 85</dd></div>
+      <div><dt>Рейтинг в 2ГИС</dt><dd>4,9 из 5</dd></div>
+      <div><dt>Премия</dt><dd>Шорт-лист WHERETOEAT Сибирь 2026</dd></div>
+    </div>
+  </dl>
+</section>
+
+<!-- ===== О РЕСТОРАНЕ ===== -->
+<section class="about" id="about">
+  <div class="wrap grid">
+    <span class="label rv"><b>01</b>О ресторане</span>
+    <div class="about-body">
+      <h2 class="rv">Печь стоит там, где её видно всем</h2>
+      <p class="big rv">«Печь и соль» открылась в мае 2026 года на первом этаже гостиничного комплекса на улице Ленина. Мы строим меню вокруг огня: дровяная печь, ремесленный хлеб, копчение и продукты, выращенные и добытые в Сибири.</p>
+      <dl class="facts">
+        <div class="rv"><dt>Печь</dt><dd>Часть блюд готовится в дровяной печи на виду у гостей. Огонь и дым здесь работают как приправа.</dd></div>
+        <div class="rv" style="--i:1"><dt>Соль</dt><dd>Запекание в соляном панцире, засолка, выдержка. Соль у нас не добавка, а способ готовки.</dd></div>
+        <div class="rv" style="--i:2"><dt>Сибирь</dt><dd>Рыба из сибирских озёр, местные овощи и ягоды. Если продукта нет на месте, мы обходимся без него.</dd></div>
+      </dl>
+      <p class="award rv">В октябре 2026 года ресторан попал в шорт-лист премии <b>WHERETOEAT Сибирь</b>. Итоги определит тайное голосование экспертов.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== МЕНЮ ===== -->
+<section class="menu" id="menu">
+  <div class="wrap grid">
+    <figure class="menu-photo-wrap rv">
+      <div class="arch menu-photo"><img src="img/keramika.webp" width="661" height="885" alt="Льняная салфетка с вышитым логотипом «Печь и соль» на керамической тарелке ручной работы с растительным отпечатком" loading="lazy" style="object-position:50% 40%"></div>
+      <figcaption><b>02</b>Лён с вышивкой, керамика ручной работы</figcaption>
+    </figure>
+    <div class="menu-main">
+      <span class="label rv"><b>02</b>Меню</span>
+      <h2 class="rv" style="margin-top:22px">Что готовит <i>печь</i></h2>
+      <p class="menu-lead rv">Большая часть блюд стоит от 500 до 700 рублей. Меню меняется с продуктами, поэтому у разных гостей оно выглядит по-разному.</p>
+      <div class="tabs rv" role="tablist" aria-label="Разделы меню" id="tabs"></div>
+      <div id="panels"></div>
+      <p class="menu-note rv">Состав и цены актуализирует ресторан. Точное меню на день уточняйте у администратора при бронировании.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== АТМОСФЕРА ===== -->
+<section class="air" id="air">
+  <div class="wrap">
+    <div class="air-head rv"><span class="label"><b>03</b>Зал</span></div>
+    <div class="grid row1">
+      <figure class="f-zal rv">
+        <img src="img/zal.webp" width="1051" height="873" alt="Общий зал: бетонный потолок с коммуникациями, деревянные столы, оранжевые и серые кресла, шторы и подвесные светильники" loading="lazy">
+        <figcaption><b>03</b>Общий зал: бетон, дерево, шторы цвета оливы</figcaption>
+      </figure>
+      <div class="t-zal rv" style="--i:1">
+        <h3>Бетон, лён, <i>дерево</i></h3>
+        <p>Серый потолок с открытыми коммуникациями, тёплый свет над деревянными столами и терракотовые кресла. Не нужно ничего изображать: здесь можно просто сесть и поесть.</p>
+      </div>
+    </div>
+    <div class="grid row2">
+      <div class="t-bar rv">
+        <h3>У <i>бара</i></h3>
+        <p>Полки с подсветкой, зелёные рифлёные фасады и живые растения. Здесь можно выпить до ужина или остаться на весь вечер.</p>
+      </div>
+      <figure class="f-bar rv" style="--i:1">
+        <img src="img/bar.webp" width="1027" height="862" alt="Барная стойка с тёплой подсветкой полок, бутылками и стеклом" loading="lazy">
+        <figcaption><b>04</b>Барная зона</figcaption>
+      </figure>
+    </div>
+    <p class="quote rv">Стол из дерева, лён <span>и</span> огонь за стеной.</p>
+  </div>
+</section>
+
+<!-- ===== БРОНИРОВАНИЕ ===== -->
+<section class="reserve" id="reserve">
+  <div class="wrap grid">
+    <div class="res-info">
+      <span class="label rv"><b>04</b>Бронь</span>
+      <h2 class="rv">Забронировать <i>стол</i></h2>
+      <p class="rv">Заполните форму. Заявка откроется в Telegram уже готовой, администратор подтвердит время.</p>
+      <ol class="steps rv">
+        <li>Выберите дату, время и число гостей.</li>
+        <li>Отправьте заявку в Telegram.</li>
+        <li>Дождитесь подтверждения от администратора.</li>
+      </ol>
+    </div>
+
+    <div class="res-form rv" style="--i:1">
+      <form id="resForm" novalidate>
+        <div class="field"><label for="f-name">Имя</label><input id="f-name" name="name" autocomplete="name" placeholder="Как к вам обращаться" required maxlength="60"><span class="msg">Укажите имя</span></div>
+        <div class="field"><label for="f-phone">Телефон</label><input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 900 000-00-00" required maxlength="22"><span class="msg">Введите номер полностью</span></div>
+        <div class="field"><label for="f-date">Дата</label><input id="f-date" name="date" type="date" required><span class="msg">Выберите дату</span></div>
+        <div class="field"><label for="f-time">Время</label><select id="f-time" name="time" required></select><span class="msg">Выберите время</span></div>
+        <div class="field"><label for="f-guests">Гостей</label><select id="f-guests" name="guests"></select></div>
+        <div class="field"><label for="f-zone">Где сесть</label>
+          <select id="f-zone" name="zone"><option>Без предпочтений</option><option>Рядом с печью</option><option>В зале</option><option>У бара</option></select></div>
+        <div class="field full"><label for="f-note">Комментарий</label><textarea id="f-note" name="note" maxlength="300" placeholder="Повод, аллергии, детский стул"></textarea></div>
+        <div class="form-foot">
+          <button class="btn" type="submit" id="submitBtn">Отправить заявку</button>
+          <small>Отправляя заявку, вы передаёте имя и телефон администратору ресторана для подтверждения брони.</small>
+        </div>
+      </form>
+
+      <div class="success" id="success" role="status" aria-live="polite">
+        <h3>Заявка готова</h3>
+        <p id="successText"></p>
+        <div class="acts">
+          <a class="btn" id="tgBtn" href="#" target="_blank" rel="noopener">Открыть Telegram</a>
+          <button class="btn line" id="copyBtn" type="button">Скопировать текст</button>
+          <button class="btn line" id="againBtn" type="button">Новая заявка</button>
+        </div>
+      </div>
+
+      <div class="mine">
+        <h3>Ваши заявки</h3>
+        <ul id="mineList"></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== КОНТАКТЫ ===== -->
+<section class="contacts" id="contacts">
+  <div class="wrap">
+    <div class="grid">
+      <div class="c-big">
+        <span class="label rv"><b>05</b>Контакты</span>
+        <h2 class="rv" id="cTitle">Ленина, 85</h2>
+        <p class="rv" id="cNote">Новосибирск. Вход с улицы Шамшурина: ресторан занимает первый этаж V-образного здания на пересечении Ленина и Шамшурина.</p>
+      </div>
+      <dl class="c-list rv" style="--i:1">
+        <div><dt>Часы работы</dt><dd id="cHours"></dd></div>
+        <div><dt>Телефон</dt><dd><a id="cPhone" href="#"></a></dd></div>
+        <div><dt>Telegram</dt><dd><a id="cTg" href="#" target="_blank" rel="noopener"></a></dd></div>
+        <div class="c-maps"><a class="link arrow" id="mapLink" href="#" target="_blank" rel="noopener">2ГИС</a><a class="link arrow" id="mapLink2" href="#" target="_blank" rel="noopener">Яндекс Карты</a></div>
+      </dl>
+    </div>
+    <footer>
+      <span>© <span id="yr"></span> Ресторан «Печь и соль»</span>
+      <span>Современная сибирская кухня, Новосибирск</span>
+    </footer>
+  </div>
+</section>
+</main>
+
+<script>
+/* =====================================================================
+   НАСТРОЙКИ. Меняйте только этот блок.
+   Подтверждено открытыми источниками: название, адрес, концепция,
+   рейтинг 2ГИС, три блюда с ценами (НГС, 12.05.2026), шорт-лист премии.
+   Заполните сами: телефон, часы работы, Telegram администратора.
+   ===================================================================== */
+const CONFIG = {
+  name: "Печь и соль",
+  address: "Новосибирск, ул. Ленина, 85",
+  phone: "",                       // например "+7 383 000-00-00"
+  hours: "Уточняйте у администратора",   // например "Ежедневно 09:00–23:00"
+  tgUser: "YOUR_TELEGRAM",         // имя администратора или бота без @
+  proxyUrl: "",                    // необязательно: URL вашего Cloudflare Worker
+  slots: ["12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00"],
+  maxGuests: 12,
+  storageKey: "pechisol_bookings_v1"
+};
+
+/* Меню. Позиции с v:true и цены к ним найдены в открытых источниках.
+   Остальные позиции — образец структуры: замените реальным меню. */
+const MENU = [
+  { id:"zakuski", title:"Закуски", items:[
+    { n:"Строганина из муксуна", p:620, d:"Подмороженная рыба, чёрная соль, хрен, ржаной крекер" },
+    { n:"Паштет из печени с брусникой", p:520, d:"Хлеб на закваске из печи, солёное масло" },
+    { n:"Грибы, томлёные в печи", p:560, d:"Лесные грибы, сметана, кедровое масло" }
+  ]},
+  { id:"goryachie", title:"Горячие закуски", items:[
+    { n:"Картофель обугленный со сметаной", p:380, d:"Клубни, доведённые до корочки на углях", v:true },
+    { n:"Пельмени с олениной", p:640, d:"Бульон из печи, укроп, топлёное масло" },
+    { n:"Тыква, запечённая на огне", p:540, d:"Кедровый орех, творожный сыр, мёд" }
+  ]},
+  { id:"pech", title:"Из печи", items:[
+    { n:"Омуль, запечённый в дровяной печи в панцире из соли", p:2350, d:"Подаётся целиком, раскрывается за столом", v:true, tag:"фирменное" },
+    { n:"Брискет с запечённой морковью", p:1150, d:"Долгое томление, морковь из печи", v:true },
+    { n:"Утка, глазированная на углях", p:980, d:"Облепиха, ржаной хлеб, соус из печёных яблок" }
+  ]},
+  { id:"deserty", title:"Десерты", items:[
+    { n:"Тёплый хлебный пудинг", p:460, d:"Ржаной хлеб, карамель, сметанное мороженое" },
+    { n:"Кедровый крем", p:480, d:"Орех, облепиховый курд, песочная крошка" },
+    { n:"Сыры региона", p:620, d:"Мёд, ягоды, хлеб из печи" }
+  ]},
+  { id:"bar", title:"Бар", items:[
+    { n:"Настойка дня", p:340, d:"Сибирские ягоды и травы" },
+    { n:"Морс из брусники", p:260, d:"Домашний, без избытка сахара" },
+    { n:"Чай с таёжными травами", p:320, d:"Чайник на двоих" }
+  ]}
+];
+
+/* ---------- утилиты ---------- */
+const $ = (s, r=document) => r.querySelector(s);
+const el = (tag, cls, text) => { const e=document.createElement(tag); if(cls) e.className=cls; if(text!==undefined) e.textContent=text; return e; };
+const fmt = n => n.toLocaleString("ru-RU") + " ₽";
+const store = {
+  get(){ try{ return JSON.parse(localStorage.getItem(CONFIG.storageKey)) || []; }catch(e){ return []; } },
+  set(v){ try{ localStorage.setItem(CONFIG.storageKey, JSON.stringify(v)); }catch(e){} }
+};
+
+/* ---------- контакты ---------- */
+(function(){
+  $("#cHours").textContent = CONFIG.hours;
+  const ph = $("#cPhone");
+  if(CONFIG.phone){ ph.textContent = CONFIG.phone; ph.href = "tel:" + CONFIG.phone.replace(/[^\d+]/g,""); }
+  else { ph.textContent = "Через Telegram"; ph.removeAttribute("href"); }
+  const tg = $("#cTg");
+  tg.textContent = "@" + CONFIG.tgUser;
+  tg.href = "https://t.me/" + CONFIG.tgUser;
+  const q = encodeURIComponent("Печь и соль Новосибирск Ленина 85");
+  $("#mapLink").href = "https://2gis.ru/novosibirsk/search/" + q;
+  $("#mapLink2").href = "https://yandex.ru/maps/65/novosibirsk/search/" + q;
+  $("#yr").textContent = new Date().getFullYear();
+})();
+
+/* ---------- шапка и мобильное меню ---------- */
+const header = $("#top"), burger = $("#burger"), links = $("#links");
+const onScroll = () => header.classList.toggle("scrolled", window.scrollY > 40);
+onScroll(); window.addEventListener("scroll", onScroll, {passive:true});
+function setNav(open){
+  links.classList.toggle("open", open);
+  burger.setAttribute("aria-expanded", open);
+  burger.setAttribute("aria-label", open ? "Закрыть меню" : "Открыть меню");
+  document.body.classList.toggle("lock", open);
+}
+burger.addEventListener("click", () => setNav(!links.classList.contains("open")));
+links.addEventListener("click", e => { if(e.target.closest("a")) setNav(false); });
+document.addEventListener("keydown", e => { if(e.key==="Escape") setNav(false); });
+window.addEventListener("resize", () => { if(window.innerWidth>1000) setNav(false); });
+
+/* ---------- меню на табах ---------- */
+(function(){
+  const tabs = $("#tabs"), panels = $("#panels");
+  MENU.forEach((cat, i) => {
+    const t = el("button","tab",cat.title);
+    t.type="button"; t.setAttribute("role","tab"); t.id="tab-"+cat.id;
+    t.setAttribute("aria-controls","panel-"+cat.id);
+    t.setAttribute("aria-selected", i===0);
+    t.tabIndex = i===0 ? 0 : -1;
+    tabs.appendChild(t);
+
+    const p = el("div","panel"+(i===0?" active":""));
+    p.id="panel-"+cat.id; p.setAttribute("role","tabpanel"); p.setAttribute("aria-labelledby", t.id);
+    const ul = el("ul");
+    cat.items.forEach(it => {
+      const li = el("li","dish");
+      const row = el("div","dish-row");
+      const name = el("span","dish-name",it.n);
+      if(it.tag) name.appendChild(el("span","sign",it.tag));
+      row.append(name, el("span","dish-dots"), el("span","dish-price",fmt(it.p)));
+      li.appendChild(row);
+      if(it.d) li.appendChild(el("p","dish-desc",it.d));
+      ul.appendChild(li);
+    });
+    p.appendChild(ul); panels.appendChild(p);
+  });
+
+  const all = [...tabs.querySelectorAll(".tab")];
+  function select(t, focus){
+    all.forEach(x => {
+      const on = x===t;
+      x.setAttribute("aria-selected", on); x.tabIndex = on?0:-1;
+      $("#"+x.getAttribute("aria-controls")).classList.toggle("active", on);
+    });
+    t.scrollIntoView({inline:"center", block:"nearest", behavior:"smooth"});
+    if(focus) t.focus();
+  }
+  tabs.addEventListener("click", e => { const t=e.target.closest(".tab"); if(t) select(t); });
+  tabs.addEventListener("keydown", e => {
+    const i = all.indexOf(document.activeElement); if(i<0) return;
+    let n = null;
+    if(e.key==="ArrowRight") n = all[(i+1)%all.length];
+    if(e.key==="ArrowLeft") n = all[(i-1+all.length)%all.length];
+    if(e.key==="Home") n = all[0];
+    if(e.key==="End") n = all[all.length-1];
+    if(n){ e.preventDefault(); select(n,true); }
+  });
+})();
+
+/* ---------- появление блоков ---------- */
+(function(){
+  const items = document.querySelectorAll(".rv");
+  if(!("IntersectionObserver" in window)){ items.forEach(i=>i.classList.add("in")); return; }
+  const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }}), {threshold:.1, rootMargin:"0px 0px -5% 0px"});
+  items.forEach(i => io.observe(i));
+})();
+
+/* ---------- мягкий параллакс фото в первом экране ---------- */
+(function(){
+  const img = $(".hero-photo img");
+  if(!img || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  img.style.transform = "scale(1.07)";
+  let busy = false;
+  window.addEventListener("scroll", () => {
+    if(busy) return; busy = true;
+    requestAnimationFrame(() => {
+      const y = Math.min(window.scrollY, 800);
+      img.style.transform = "scale(1.07) translateY(" + (y*0.05).toFixed(1) + "px)";
+      busy = false;
+    });
+  }, {passive:true});
+})();
+
+/* ---------- форма брони ---------- */
+const form = $("#resForm"), success = $("#success");
+(function(){
+  const time = $("#f-time"), guests = $("#f-guests"), date = $("#f-date");
+  time.appendChild(new Option("Выберите время",""));
+  CONFIG.slots.forEach(s => time.appendChild(new Option(s,s)));
+  for(let i=1;i<=CONFIG.maxGuests;i++) guests.appendChild(new Option(i + (i===1?" гость":i<5?" гостя":" гостей"), i));
+  guests.value = 2;
+  const today = new Date(); today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
+  const iso = today.toISOString().slice(0,10);
+  date.min = iso; date.value = iso;
+  const ph = $("#f-phone");
+  ph.addEventListener("input", () => {
+    let d = ph.value.replace(/\D/g,"");
+    if(d.startsWith("8")) d = "7"+d.slice(1);
+    if(d && !d.startsWith("7")) d = "7"+d;
+    d = d.slice(0,11);
+    let o = d ? "+7" : "";
+    if(d.length>1) o += " " + d.slice(1,4);
+    if(d.length>4) o += " " + d.slice(4,7);
+    if(d.length>7) o += "-" + d.slice(7,9);
+    if(d.length>9) o += "-" + d.slice(9,11);
+    ph.value = o;
+  });
+  form.addEventListener("input", e => { const f = e.target.closest(".field"); if(f) f.classList.remove("err"); });
+})();
+
+function validate(){
+  let ok = true;
+  const mark = (id, bad) => { const f = $(id).closest(".field"); f.classList.toggle("err", bad); if(bad) ok=false; };
+  mark("#f-name", $("#f-name").value.trim().length < 2);
+  mark("#f-phone", $("#f-phone").value.replace(/\D/g,"").length !== 11);
+  mark("#f-date", !$("#f-date").value || $("#f-date").value < $("#f-date").min);
+  mark("#f-time", !$("#f-time").value);
+  if(!ok){ const bad = form.querySelector(".err input, .err select"); if(bad) bad.focus(); }
+  return ok;
+}
+
+function bookingText(b){
+  const d = new Date(b.date + "T12:00:00").toLocaleDateString("ru-RU",{day:"numeric",month:"long",weekday:"short"});
+  return [
+    "Бронь стола, " + CONFIG.name,
+    "Имя: " + b.name,
+    "Телефон: " + b.phone,
+    "Дата: " + d + ", " + b.time,
+    "Гостей: " + b.guests,
+    "Где сесть: " + b.zone,
+    b.note ? "Комментарий: " + b.note : ""
+  ].filter(Boolean).join("\n");
+}
+
+/* Вариант A (по умолчанию, безопасно для GitHub Pages): открываем чат с администратором, текст уже вставлен.
+   Вариант B: если задан CONFIG.proxyUrl, заявка уходит JSON-ом на ваш прокси.
+   Токен бота НЕЛЬЗЯ класть в этот файл: на GitHub Pages он виден всем.
+   Пример Cloudflare Worker (токен лежит в секретах воркера):
+     export default { async fetch(req, env){
+       if(req.method!=="POST") return new Response("ok");
+       const {text} = await req.json();
+       await fetch(`https://api.telegram.org/bot${env.BOT_TOKEN}/sendMessage`,{
+         method:"POST",headers:{"content-type":"application/json"},
+         body:JSON.stringify({chat_id:env.CHAT_ID,text})});
+       return new Response("sent",{headers:{"access-control-allow-origin":"*"}});
+     }} */
+async function sendBooking(b){
+  const text = bookingText(b);
+  const tgUrl = "https://t.me/" + CONFIG.tgUser + "?text=" + encodeURIComponent(text);
+  let via = "link";
+  if(CONFIG.proxyUrl){
+    try{
+      const r = await fetch(CONFIG.proxyUrl,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({text,booking:b})});
+      if(r.ok) via = "proxy";
+    }catch(e){ /* упадём на ссылку */ }
+  }
+  return {text, tgUrl, via};
+}
+
+form.addEventListener("submit", async e => {
+  e.preventDefault();
+  if(!validate()) return;
+  const btn = $("#submitBtn"); btn.disabled = true;
+  const fd = new FormData(form);
+  const b = {
+    id: Date.now().toString(36),
+    name: fd.get("name").trim(), phone: fd.get("phone"), date: fd.get("date"), time: fd.get("time"),
+    guests: fd.get("guests"), zone: fd.get("zone"), note: (fd.get("note")||"").trim(),
+    createdAt: new Date().toISOString()
+  };
+  const list = store.get(); list.unshift(b); store.set(list.slice(0,20));
+  renderMine();
+  const res = await sendBooking(b);
+  form.style.display = "none"; success.classList.add("show");
+  $("#tgBtn").href = res.tgUrl;
+  $("#successText").textContent = res.via==="proxy"
+    ? "Заявка отправлена администратору. Мы свяжемся с вами для подтверждения."
+    : "Откройте Telegram и отправьте подготовленное сообщение, чтобы администратор подтвердил бронь.";
+  $("#copyBtn").onclick = async () => {
+    try{ await navigator.clipboard.writeText(res.text); $("#copyBtn").textContent="Скопировано"; }
+    catch(err){ $("#copyBtn").textContent="Не удалось"; }
+    setTimeout(()=>{ $("#copyBtn").textContent="Скопировать текст"; },2000);
+  };
+  if(res.via==="link") window.open(res.tgUrl, "_blank", "noopener");
+  btn.disabled = false;
+  success.scrollIntoView({behavior:"smooth", block:"center"});
+});
+$("#againBtn").addEventListener("click", () => {
+  success.classList.remove("show"); form.style.display = ""; form.reset();
+  $("#f-date").value = $("#f-date").min; $("#f-guests").value = 2;
+});
+
+function renderMine(){
+  const ul = $("#mineList"); ul.replaceChildren();
+  const list = store.get();
+  if(!list.length){ ul.appendChild(el("li","empty","Пока нет сохранённых заявок.")); return; }
+  list.forEach(b => {
+    const li = el("li");
+    const box = el("div");
+    const d = new Date(b.date + "T12:00:00").toLocaleDateString("ru-RU",{day:"numeric",month:"long"});
+    box.append(document.createTextNode(d + ", " + b.time + ", гостей: " + b.guests));
+    box.appendChild(el("small",null,b.name + ", " + b.phone));
+    const del = el("button",null,"Удалить"); del.type="button";
+    del.addEventListener("click", () => { store.set(store.get().filter(x => x.id!==b.id)); renderMine(); });
+    li.append(box, del); ul.appendChild(li);
+  });
+}
+renderMine();
+</script>
+</body>
+</html>
